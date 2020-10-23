@@ -3,11 +3,16 @@ import './ViewCertificate1.css';
 import { Table, Row, Col } from 'react-bootstrap';
 import { RouteComponentProps } from 'react-router-dom';
 import axios from 'axios';
+import QRCode from 'qrcode.react'
+import { ethers } from 'ethers';
+import Swal from 'sweetalert2';
+
 
 type State = {
   bunchModal: boolean;
   Data: LoadData;
   auth: Auth;
+  Donate ?: string;
 };
 interface MyViewProperties extends RouteComponentProps {
   hash: string;
@@ -36,17 +41,105 @@ export class ViewCertificate1 extends Component<MyViewProperties, State> {
     bunchModal: false,
     Data: {},
     auth: {},
+    Donate: '0'  
   };
   color: string[] = ['danger', 'primary', 'success'];
   hash = '';
-
+  Balance;
+  Verifier='';
+  myAddress='';
   handleClose = () => {
     this.setState({
       bunchModal: false,
     });
   };
+  async Donate(){
+    if (window.wallet) {
+      try {
+        const sur = await window.certificateInstance
+          .connect(window.wallet)
+          .donate(this.hash,{value: ethers.utils.parseEther(this.state.Donate)});
+        const receipt = await sur.wait();
+        console.log('TXN Hash :', receipt);
+        Swal.fire({
+          icon: 'success',
+          title: 'Great 👍',
+          text: 'You have Register you Certificate ',
+        });
+        
+      } catch (e) {
+        const add = await window.wallet.getAddress();
+        const x = new ethers.VoidSigner(add, window.providerESN);
+        try {
+          const A = await window.certificateInstance
+            .connect(x)
+            .estimateGas.donate(this.hash,{value: ethers.utils.parseEther(this.state.Donate)});
+          console.log(A);
+        } catch (e) {
+          console.log('Error is : ', e);
+
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: `${e}`,
+          });
+          console.log(e);
+        }
+      }
+    } else
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please Connect to wallet!',
+      });
+  }
+
+  async Colect(){
+    if (window.wallet) {
+      try {
+        const sur = await window.certificateInstance
+          .connect(window.wallet)
+          .collect(this.hash);
+        const receipt = await sur.wait();
+        console.log('TXN Hash :', receipt);
+        Swal.fire({
+          icon: 'success',
+          title: 'Great 👍',
+          text: 'You have Register you Certificate ',
+        });
+        
+      } catch (e) {
+        const add = await window.wallet.getAddress();
+        const x = new ethers.VoidSigner(add, window.providerESN);
+        try {
+          const A = await window.certificateInstance
+            .connect(x)
+            .estimateGas.collect(this.hash);
+          console.log(A);
+        } catch (e) {
+          console.log('Error is : ', e);
+
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: `${e}`,
+          });
+          console.log(e);
+        }
+      }
+    } else
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please Connect to wallet!',
+      });
+  }
+  
+  
   async componentDidMount() {
     const { params }: any = this.props.match;
+  this.myAddress = (window?.wallet?.address)?window.wallet.address : (await window.wallet?.getAddress());
+
 
     console.log(params.hash);
     console.log(this.props);
@@ -55,6 +148,9 @@ export class ViewCertificate1 extends Component<MyViewProperties, State> {
       const txn = await window.certificateInstance.certificates(params.hash);
       console.log(txn);
       const Data = await axios.get(`https://ipfs.eraswap.cloud/ipfs/${txn[0]}`);
+      this.Balance = ethers.utils.formatEther(txn[3]);
+      this.Verifier = txn[2]
+
       console.log(Data.data);
       this.setState({ Data: { ...Data.data } });
       const authority = await window.certificateInstance.authorities(txn[1]);
@@ -178,11 +274,7 @@ export class ViewCertificate1 extends Component<MyViewProperties, State> {
                     <h6 className="mt30 font-weight-bold text-dark mb20">{this.hash}</h6>
                     <div className="col-md-12 text-center">
                       <div className="qr">
-                        <img
-                          className="img-fluid"
-                          src="https://raw.githubusercontent.com/zpao/qrcode.react/HEAD/qrcode.png"
-                          alt="white-logo"
-                        />
+                      <QRCode value={this.hash} />
                       </div>
                     </div>
                     <h6 className="mt30 font-weight-bold text-dark mb20">
@@ -197,12 +289,28 @@ export class ViewCertificate1 extends Component<MyViewProperties, State> {
                       </a>
                     </div>
                   </div>
+                  
                 </div>
               </div>
+              {
+                (this.myAddress === this.Verifier)?
+                <Row className="pinside60">
+              <h6>You Have {this.Balance} ES  </h6>
+              <Col>  <button className="btn btn-primary">Withdraw now</button> </Col>
+            </Row>:
+                <Row className="pinside60">
+                <h6>Want to send Some eraswap ? </h6>
+                    <Col> <input onChange={(e) => this.setState({ Donate: e.target.value })} className="form-control" /> </Col>
+                    <Col>  <button className="btn btn-primary" onClick={this.Donate} >Send</button> </Col>
+              </Row>
+              
+              }
+              
+              
             </div>
-          </div>
+          </div> 
         </div>
       </div>
     );
-  }
+  } 
 }

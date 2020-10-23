@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Row, Col, Alert } from 'react-bootstrap';
 import axios from 'axios';
+import QRCode from 'qrcode.react'
 
 interface Certificate {
   name?: string;
@@ -152,7 +153,8 @@ export function CertificateBox(props: Certificate) {
                 </h6>
                 <div className="col-md-12 text-center">
                   <div className="qr">
-                    <img className="img-fluid" src="./images/qr.png" alt="white-logo" />
+                    {/* <img className="img-fluid" src="./images/qr.png" alt="white-logo" /> */}
+                    <QRCode value="http://facebook.github.io/react/" />
                   </div>
                 </div>
 

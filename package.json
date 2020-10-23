@@ -19,6 +19,7 @@
     "eraswap-sdk": "^1.0.6-commit.88934170",
     "ethers": "^5.0.5",
     "ipfs-http-client": "^47.0.1",
+    "qrcode.react": "^1.0.0",
     "react": "^16.13.1",
     "react-bootstrap": "1.0.1",
     "react-dom": "^16.13.1",
