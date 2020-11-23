@@ -6,7 +6,8 @@ import axios from 'axios';
 import QRCode from 'qrcode.react'
 import { ethers } from 'ethers';
 import Swal from 'sweetalert2';
-
+import ReactDOM from 'react-dom'; 
+// import "/typedoc/node_modules/typescript/lib/lib.dom.d"
 
 type State = {
   bunchModal: boolean;
@@ -18,6 +19,12 @@ interface MyViewProperties extends RouteComponentProps {
   hash: string;
   params: any;
 }
+
+interface HTMLIFrameElement {
+  contentWindow: any;
+  type?: string;
+}
+
 
 interface LoadData {
   name?: string;
@@ -43,6 +50,7 @@ export class ViewCertificate1 extends Component<MyViewProperties, State> {
     auth: {},
     Donate: '0'  
   };
+  containerEl = document.createElement('div');;
   color: string[] = ['danger', 'primary', 'success'];
   hash = '';
   Balance;
@@ -93,13 +101,27 @@ export class ViewCertificate1 extends Component<MyViewProperties, State> {
         text: 'Please Connect to wallet!',
       });
   }
+   Print(){
+    ReactDOM.createPortal(
+      this.props?.children,
+      this.containerEl
+    )
+    var content = document.getElementById("divcontents");
+    var pri1 = document.getElementById("ifmcontentstoprint") as unknown  as HTMLIFrameElement;
+    var pri = ( pri1).contentWindow;
+    pri.document.open();
+    pri.document.write(this.containerEl);
+    pri.document.close(); 
+    pri.focus();
+    pri.print();
+  }
 
-  async Colect(){
+  async Collect(){
     if (window.wallet) {
       try {
         const sur = await window.certificateInstance
           .connect(window.wallet)
-          .collect(this.hash);
+          .collect(this.hash); 
         const receipt = await sur.wait();
         console.log('TXN Hash :', receipt);
         Swal.fire({
@@ -141,10 +163,10 @@ export class ViewCertificate1 extends Component<MyViewProperties, State> {
   this.myAddress = (window?.wallet?.address)?window.wallet.address : (await window.wallet?.getAddress());
 
 
+  this.hash = params.hash;
     console.log(params.hash);
     console.log(this.props);
     try {
-      this.hash = params.hash;
       const txn = await window.certificateInstance.certificates(params.hash);
       console.log(txn);
       const Data = await axios.get(`https://ipfs.eraswap.cloud/ipfs/${txn[0]}`);
@@ -171,9 +193,11 @@ export class ViewCertificate1 extends Component<MyViewProperties, State> {
 
   render() {
     return (
-      <div className="homebg">
+      <div className="homebg " id="divcontents">
         <div className="container main-section">
           <div className="rows text-center mt80 mb30">
+          <iframe title="hash" id="ifmcontentstoprint" style={{height: 0, width: 0, position: 'absolute'}} />
+
             <div className="header-title">
               <h3>VIEW CERTIFICATE</h3>
             </div>
@@ -195,7 +219,7 @@ export class ViewCertificate1 extends Component<MyViewProperties, State> {
               <br />
               <br />
               <br />
-              <div className="card card-round ">
+              <div  className="card card-round ">
                 <div
                   className="row pinside60"
                   style={{ border: '3px solid #004F98', margin: '1px' }}
@@ -292,11 +316,11 @@ export class ViewCertificate1 extends Component<MyViewProperties, State> {
                   
                 </div>
               </div>
-              {
+              { 
                 (this.myAddress === this.Verifier)?
                 <Row className="pinside60">
               <h6>You Have {this.Balance} ES  </h6>
-              <Col>  <button className="btn btn-primary">Withdraw now</button> </Col>
+              <Col>  <button onClick={this.Collect} className="btn btn-primary">Withdraw now</button> </Col>
             </Row>:
                 <Row className="pinside60">
                 <h6>Want to send Some eraswap ? </h6>
@@ -306,7 +330,7 @@ export class ViewCertificate1 extends Component<MyViewProperties, State> {
               
               }
               
-              
+              <button onClick={this.Print} className="btn btn-primary">Print </button>
             </div>
           </div> 
         </div>
@@ -314,3 +338,5 @@ export class ViewCertificate1 extends Component<MyViewProperties, State> {
     );
   } 
 }
+
+

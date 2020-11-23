@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './Navbar.css';
 import { Link } from 'react-router-dom';
-import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown, Dropdown } from 'react-bootstrap';
 import ethers from 'ethers';
 import Swal from 'sweetalert2';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 import copy from 'copy-to-clipboard';
 
 export function NavbarMain() {
-  const [Address, setAddress] = useState(null);
+  const [Address, setAddress] = useState<string>(""); 
   const [copied, setCopied] = useState(false);
 
   // async function resolveAddress() {
@@ -81,7 +81,7 @@ export function NavbarMain() {
 
   function Wallet() {
     return (
-      <div style={{ width: '400px', marginTop: '10px' }}>
+      <div style={{ width: '400px', marginTop: '10px',padding:'5px' }}>
         <p>Use Account From </p>
         <div className="dropdown-divider "></div>
         <div className="row">
@@ -104,7 +104,7 @@ export function NavbarMain() {
           </div>
           <div
             className="col-4 text-center wallet "
-            onClick={() => window.open('https://eraswap.life/', '', 'width=1001,height=650')}
+            onClick={() => window.open('https://eraswap.life/access-my-wallet', '', 'width=1001,height=650')}
           >
             <img className="my-3" src="./images/eralogo.png" width="70px" alt="eraswap" />
             <h6>EraSwap.life</h6>
@@ -125,7 +125,7 @@ export function NavbarMain() {
 
   function Account() {
     return (
-      <div style={{ width: '400px', marginTop: '10px' }}>
+      <div style={{ width: '400px', marginTop: '10px',padding:'5px' }}>
         <p>ACTIVE ACCOUNT</p>
         <div className="dropdown-divider "></div>
 
@@ -170,27 +170,18 @@ export function NavbarMain() {
       const message = e.data;
       if (message.substring) {
         if (message.substring(0, 2) === '0x') {
-          if (window.wallet) setAddress(window.wallet.address);
+          if (window?.wallet?.address)setAddress(window?.wallet?.address);
         }
       }
     }, 0);
   }
-  (async () => {
-    if (window.wallet) {
-      if (window.wallet.address) setAddress(window.wallet.address);
-      else setAddress(await window.wallet.getAddress());
-    }
-  })();
 
   useEffect(() => {
-    window.addEventListener('message', (e) => {
-      CustomWallets(e);
-    });
+    window.addEventListener('message',e=>{CustomWallets(e)} );
+    if(Address==="")setAddress(window?.wallet?.address);
     return () => {
-      window.removeEventListener('message', (e) => {
-        CustomWallets(e);
-      });
-    };
+           window.removeEventListener('message', e=>{CustomWallets(e)})
+        }
   }, [Address]);
 
   return (
@@ -223,33 +214,17 @@ export function NavbarMain() {
               <Link to="/SignCertificate">Sign Certificate</Link>
             </NavDropdown.Item>
           </NavDropdown>
-          <Nav.Link href="https://certidapp.com/" target="_blank">
-            Blockchain Survey
-          </Nav.Link>
+          
 
           <Nav>
-            <div className="dropdown nav mr10  ">
-              <button
-                className=" btn btn-primary btn-xl js-scroll-trigger combtn con-wabtn"
-                type="button"
-                id="dropdownMenu"
-                data-toggle="dropdown"
-              >
-                {!Address ? (
-                  'Connect to Wallet'
-                ) : (
-                  <>
-                    <i className="fa fa-circle text-success"></i>&nbsp;{Address}
-                  </>
-                )}
-              </button>
-              <div
-                className="dropdown-menu px-2 dropdown-menu-right "
-                aria-labelledby="dropdownMenu"
-              >
-                {!Address ? <Wallet /> : <Account />}
-              </div>
-            </div>
+            <Dropdown className="nav ml10 mr10" alignRight>
+              <Dropdown.Toggle className=" btn btn-primary btn-xl js-scroll-trigger combtn con-wabtn" id="dropdown-basic">
+                {(!Address)?('Connect to Wallet'):(<><i className="fa fa-circle text-success"></i>&nbsp;{Address}</>) }
+              </Dropdown.Toggle>
+              <Dropdown.Menu  > 
+                {(!Address)?<Wallet />:<Account/>}
+              </Dropdown.Menu>
+            </Dropdown>             
           </Nav>
           {/* <Nav.Link href="https://eraswaptoken.io/pdf/eraswap_whitepaper.pdf" target="_blank">Whitepaper</Nav.Link> */}
         </Nav>

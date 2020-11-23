@@ -16,7 +16,7 @@
     "@walletconnect/web3-provider": "^1.3.1",
     "axios": "^0.20.0",
     "copy-to-clipboard": "^3.3.1",
-    "eraswap-sdk": "^1.0.6-commit.88934170",
+    "eraswap-sdk": "^3.0.3-commit.3b6d66d0",
     "ethers": "^5.0.5",
     "ipfs-http-client": "^47.0.1",
     "qrcode.react": "^1.0.0",
@@ -27,7 +27,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "sweetalert2": "^10.6.1",
-    "typescript": "~3.7.2"
+    "typescript": "^4.0.3"
   },
   "scripts": {
     "start": "react-scripts start",

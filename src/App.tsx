@@ -8,6 +8,8 @@ import { ListAuthorities } from './components/ListAuthorities/ListAuthorities';
 import { SignCertificate } from './components/SignCertificate/SignCertificate';
 import './App.css';
 import { NavbarMain } from './components/Navbar/';
+import { ESCloud } from './components/ESCloud/ESCloud';
+import { Footer } from './components/Footer/Footer';
 
 function App() {
   return (
@@ -21,7 +23,9 @@ function App() {
           <Route path="/ViewCertificate/:hash" exact component={ViewCertificate1} />
           <Route path="/ListAuthorities" exact component={ListAuthorities} />
           <Route path="/SignCertificate" exact component={SignCertificate} />
+          {/* <Route path="/ES" exact component={ESCloud} /> */}
         </Switch>
+        <Footer />
       </BrowserRouter>
     </div>
   );

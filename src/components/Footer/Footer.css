@@ -1,0 +1,55 @@
+
+.terms a {
+  color: #000;
+}
+.contact-detail a {
+  width: 30%;
+}
+.nav1 {
+  background-image: url(/assets/images/Tech.jpg);
+  height: 400px;
+}
+.nav2 {
+  background-image: url(/assets/images/2085.jpg);
+  height: 400px;
+}
+.designed .person-img {
+  background-image: url(/assets/images/person.jpg);
+}
+.powerby {
+  padding-top: 140px !important;
+}
+.message h4 {
+  padding-top: 140px !important;
+  color: #fff !important;
+}
+
+.social-links li {
+  list-style-type: none;
+  display: inline-block;
+  padding: 0px 10px;
+  margin-bottom: 5px;
+  font-size: 21px;
+  
+}
+.footer_txt_size {
+  font-size: 1rem;
+
+  text-align: left;
+  
+}
+.footer_container {
+  justify-content: space-between;
+}
+.footer_txt_size ul li {
+  list-style-type: none;
+}
+.bg{
+  background: #e1f0ff;
+  border-top: 2px solid #3276B2;
+  padding: 5em;
+}
+.footer_txt_size p,.footer_txt_size a,.footer_txt_size div {
+  color: #005099 !important;
+
+}

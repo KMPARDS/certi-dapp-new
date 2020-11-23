@@ -177,7 +177,7 @@ export class ListAuthorities extends Component<State> {
                   Become Certified Authority
                 </div>
                 <div className="row">
-                  <div className="col-sm-12 text-cente">
+                  <div className="col-sm-12 text-center">
                     <Form className="text-left" onSubmit={this.onSubmit}>
                       <Form.Group controlId="formBasicEmail">
                         <Form.Label>Enter Name:</Form.Label>
