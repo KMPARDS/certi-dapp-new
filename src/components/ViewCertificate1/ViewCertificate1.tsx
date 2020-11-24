@@ -264,7 +264,7 @@ export class ViewCertificate1 extends Component<MyViewProperties, State> {
                             <div className="whitebox2">
                               <img
                                 className="img-fluid"
-                                src="https://ipfs.eraswap.cloud/ipfs/QmdQALCX4i6bqao6onaK1WJ3RfJDgKUd1RdAqZc7HfgHZV"
+                                src={`https://ipfs.eraswap.cloud/ipfs/${this.state.auth.image}`}
                                 alt="white-logo"
                               />
                             </div>
