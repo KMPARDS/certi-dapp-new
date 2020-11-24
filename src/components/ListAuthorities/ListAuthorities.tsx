@@ -80,7 +80,7 @@ export class ListAuthorities extends Component<State> {
         console.log('TXN Hash :', sur);
         Swal.fire({
           icon: 'success',
-          title: 'Oops...',
+          title: 'Great...',
           text: 'You are added',
         });
       } catch (e) {

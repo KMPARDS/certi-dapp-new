@@ -70,7 +70,7 @@ export class RegisterCertificate extends Component<State> {
   handleRegister = async (e) => {
     e.preventDefault();
     const Args = this.state.signHash.split(',');
-    console.log(Args);
+    console.log(Args); 
     this.setState({ Args: Args });
     // const color: string[] = ['danger', 'primary', 'success'];
 
