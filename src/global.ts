@@ -8,6 +8,7 @@ import { ethers } from 'ethers';
 // import { BuildSurvey } from 'eraswap-sdk/dist/typechain/ESN/BuildSurvey';
 import { CustomProvider } from 'eraswap-sdk/dist/custom-provider';
 import { Certificate } from './ethereum/Certificate';
+import { CertificateFlattenCertificate } from './ethereum/CertificateFlattenCertificate';
 // import { CustomWallet } from './ethereum/custom-wallet';
 // import { JsonRpcSigner } from 'ethers'
 
@@ -23,6 +24,6 @@ declare global {
     // validatorManagerInstance: ValidatorManager;
     // prepaidEsInstance: PrepaidEs;
     ethereum: ethers.providers.ExternalProvider;
-    certificateInstance: Certificate;
+    certificateInstance: CertificateFlattenCertificate;
   }
 }
