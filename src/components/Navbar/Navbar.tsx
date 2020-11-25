@@ -106,7 +106,7 @@ export function NavbarMain() {
             className="col-4 text-center wallet "
             onClick={() => window.open('https://eraswap.life/access-my-wallet', '', 'width=1001,height=650')}
           >
-            <img className="my-3" src="./images/eralogo.png" width="70px" alt="eraswap" />
+            <img className="my-3" src={process.env.PUBLIC_URL+'/images/eralogo.png'} width="70px" alt="eraswap" />
             <h6>EraSwap.life</h6>
           </div>
         </div>
@@ -187,7 +187,7 @@ export function NavbarMain() {
   return (
     <Navbar expand="lg" bg="red" className="color-nav" variant="light" fixed="top">
       <Navbar.Brand href="/">
-        <img className="white-logo" src="./images/whitelogo.png" alt="white-logo" />
+        <img className="white-logo" src={process.env.PUBLIC_URL+"/images/whitelogo.png"} alt="white-logo" />
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
