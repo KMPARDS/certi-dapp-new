@@ -11,6 +11,7 @@ import ReactDOM from 'react-dom';
 
 type State = {
   bunchModal: boolean;
+  hash:string;
   Data: LoadData;
   auth: Auth;
   Donate ?: string;
@@ -46,13 +47,14 @@ interface Auth {
 export class ViewCertificate1 extends Component<MyViewProperties, State> {
   state: State = {
     bunchModal: false,
+    hash:'',
     Data: {},
     auth: {},
     Donate: '0'  
   };
   containerEl = document.createElement('div');;
   color: string[] = ['danger', 'primary', 'success'];
-  hash = '';
+
   Balance;
   Verifier='';
   myAddress='';
@@ -61,12 +63,15 @@ export class ViewCertificate1 extends Component<MyViewProperties, State> {
       bunchModal: false,
     });
   };
-  async Donate(){
+  async Donate(e){
+    e.preventDefault();
+    console.log('hi');
+    
     if (window.wallet) {
       try {
         const sur = await window.certificateInstance
           .connect(window.wallet)
-          .donate(this.hash,{value: ethers.utils.parseEther(this.state.Donate)});
+          .donate(this.state.hash,{value: ethers.utils.parseEther(this.state.Donate)});
         const receipt = await sur.wait();
         console.log('TXN Hash :', receipt);
         Swal.fire({
@@ -81,7 +86,7 @@ export class ViewCertificate1 extends Component<MyViewProperties, State> {
         try {
           const A = await window.certificateInstance
             .connect(x)
-            .estimateGas.donate(this.hash,{value: ethers.utils.parseEther(this.state.Donate)});
+            .estimateGas.donate(this.state.hash,{value: ethers.utils.parseEther(this.state.Donate)});
           console.log(A);
         } catch (e) {
           console.log('Error is : ', e);
@@ -116,12 +121,13 @@ export class ViewCertificate1 extends Component<MyViewProperties, State> {
     pri.print();
   }
 
-  async Collect(){
+  async Collect(e){
+    e.preventDefault();
     if (window.wallet) {
       try {
         const sur = await window.certificateInstance
           .connect(window.wallet)
-          .collect(this.hash); 
+          .collect(this.state.hash); 
         const receipt = await sur.wait();
         console.log('TXN Hash :', receipt);
         Swal.fire({
@@ -136,7 +142,7 @@ export class ViewCertificate1 extends Component<MyViewProperties, State> {
         try {
           const A = await window.certificateInstance
             .connect(x)
-            .estimateGas.collect(this.hash);
+            .estimateGas.collect(this.state.hash);
           console.log(A);
         } catch (e) {
           console.log('Error is : ', e);
@@ -163,7 +169,8 @@ export class ViewCertificate1 extends Component<MyViewProperties, State> {
   this.myAddress = (window?.wallet?.address)?window.wallet.address : (await window.wallet?.getAddress());
 
 
-  this.hash = params.hash;
+  // this.hash = params.hash;
+  this.setState({hash : params.hash})
     console.log(params.hash);
     console.log(this.props);
     try {
@@ -295,10 +302,10 @@ export class ViewCertificate1 extends Component<MyViewProperties, State> {
                       </div>
                     )}
                     <h4 className="mt30 font-weight-bold text-dark mb20"> Cerficate Hash:</h4>
-                    <h6 className="mt30 font-weight-bold text-dark mb20">{this.hash}</h6>
+                    <h6 className="mt30 font-weight-bold text-dark mb20">{this.state.hash}</h6>
                     <div className="col-md-12 text-center">
                       <div className="qr">
-                      <QRCode value={this.hash} />
+                      <QRCode value={this.state.hash} />
                       </div>
                     </div>
                     <h6 className="mt30 font-weight-bold text-dark mb20">
@@ -317,15 +324,15 @@ export class ViewCertificate1 extends Component<MyViewProperties, State> {
                 </div>
               </div>
               { 
-                (this.myAddress === this.Verifier)?
+                (this.myAddress === this.Verifier)? 
                 <Row className="pinside60">
               <h6>You Have {this.Balance} ES  </h6>
-              <Col>  <button onClick={this.Collect} className="btn btn-primary">Withdraw now</button> </Col>
+              <Col>  <button onClick={e => this.Collect(e)} className="btn btn-primary">Withdraw now</button> </Col>
             </Row>:
                 <Row className="pinside60">
                 <h6>Want to send Some eraswap ? </h6>
                     <Col> <input onChange={(e) => this.setState({ Donate: e.target.value })} className="form-control" /> </Col>
-                    <Col>  <button className="btn btn-primary" onClick={this.Donate} >Send</button> </Col>
+                    <Col>  <button className="btn btn-primary" onClick={e => this.Donate(e)} >Send</button> </Col>
               </Row>
               
               }
