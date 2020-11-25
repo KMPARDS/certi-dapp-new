@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Row, Col, Alert } from 'react-bootstrap';
+import { Table, Row, Col, Alert,Spinner } from 'react-bootstrap';
 import axios from 'axios';
 import QRCode from 'qrcode.react'
 
@@ -70,16 +70,19 @@ export function CertificateBox(props: Certificate) {
       try {
         await loadipfs();
         await loadAuth();
+      setSpin(false);
+
+       
       } catch {
         setExist(false);
       }
-      setSpin(false);
     })();
   }, []);
   return (
     <div>
       <div className="card card-round ">
         <div className="row pinside60" style={{ border: '3px solid #004F98', margin: '1px' }}>
+          {spin ? <Spinner animation="border" variant="primary" />:
           <div className="col-sm-12 text-center">
             <img width="80px" src="./images/Badge.jpg" alt="white-logo" />
             <br />
@@ -174,7 +177,7 @@ export function CertificateBox(props: Certificate) {
             ) : (
               <Alert variant="danger"> View Mode only (No Signer ) </Alert>
             )}
-          </div>
+          </div>}
         </div>
       </div>
     </div>

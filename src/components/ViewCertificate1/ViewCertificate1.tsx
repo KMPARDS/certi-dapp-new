@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './ViewCertificate1.css';
-import { Table, Row, Col } from 'react-bootstrap';
+import { Table, Row, Col ,Spinner} from 'react-bootstrap';
 import { RouteComponentProps } from 'react-router-dom';
 import axios from 'axios';
 import QRCode from 'qrcode.react'
@@ -15,6 +15,7 @@ type State = {
   Data: LoadData;
   auth: Auth;
   Donate ?: string;
+  spin?: boolean;
 };
 interface MyViewProperties extends RouteComponentProps {
   hash: string;
@@ -50,7 +51,8 @@ export class ViewCertificate1 extends Component<MyViewProperties, State> {
     hash:'',
     Data: {},
     auth: {},
-    Donate: '0'  
+    Donate: '0'  ,
+    spin : true ,
   };
   containerEl = document.createElement('div');;
   color: string[] = ['danger', 'primary', 'success'];
@@ -166,42 +168,45 @@ export class ViewCertificate1 extends Component<MyViewProperties, State> {
   
   async componentDidMount() {
     const { params }: any = this.props.match;
-  this.myAddress = (window?.wallet?.address)?window.wallet.address : (await window.wallet?.getAddress());
+    this.myAddress = (window?.wallet?.address)?window.wallet.address : (await window.wallet?.getAddress());
 
 
-  // this.hash = params.hash;
-  this.setState({hash : params.hash})
-    console.log(params.hash);
-    console.log(this.props);
-    try {
-      const txn = await window.certificateInstance.certificates(params.hash);
-      console.log(txn);
-      const Data = await axios.get(`https://ipfs.eraswap.cloud/ipfs/${txn[0]}`);
-      this.Balance = ethers.utils.formatEther(txn[3]);
-      this.Verifier = txn[2]
+    // this.hash = params.hash;
+    this.setState({hash : params.hash})
+      console.log(params.hash);
+      console.log(this.props);
+      try {
+        const txn = await window.certificateInstance.certificates(params.hash);
+        console.log(txn);
+        const Data = await axios.get(`https://ipfs.eraswap.cloud/ipfs/${txn[0]}`);
+        this.Balance = ethers.utils.formatEther(txn[3]);
+        this.Verifier = txn[2]
 
-      console.log(Data.data);
-      this.setState({ Data: { ...Data.data } });
-      const authority = await window.certificateInstance.authorities(txn[1]);
-      console.log(authority);
-      this.setState({
-        auth: {
-          address: txn[1],
-          name: authority[0],
-          website: authority[1],
-          image: authority[2],
-          status: authority[3],
-        },
-      });
-    } catch (e) {
-      console.log(e);
-    }
+        console.log(Data.data);
+        this.setState({ Data: { ...Data.data } });
+        const authority = await window.certificateInstance.authorities(txn[1]);
+        console.log(authority);
+        this.setState({
+          auth: {
+            address: txn[1],
+            name: authority[0],
+            website: authority[1],
+            image: authority[2],
+            status: authority[3],
+          },
+        });
+
+      } catch (e) {
+        console.log(e);
+      }
+      this.setState({spin : false});
   }
 
   render() {
     return (
       <div className="homebg " id="divcontents">
         <div className="container main-section">
+         
           <div className="rows text-center mt80 mb30">
           <iframe title="hash" id="ifmcontentstoprint" style={{height: 0, width: 0, position: 'absolute'}} />
 
@@ -226,7 +231,7 @@ export class ViewCertificate1 extends Component<MyViewProperties, State> {
               <br />
               <br />
               <br />
-              <div  className="card card-round ">
+              {this.state.spin? <Spinner animation="border" variant="primary" /> :<div  className="card card-round ">
                 <div
                   className="row pinside60"
                   style={{ border: '3px solid #004F98', margin: '1px' }}
@@ -322,7 +327,7 @@ export class ViewCertificate1 extends Component<MyViewProperties, State> {
                   </div>
                   
                 </div>
-              </div>
+              </div>}
               { 
                 (this.myAddress === this.Verifier)? 
                 <Row className="pinside60">
