@@ -170,6 +170,7 @@ export function NavbarMain() {
       const message = e.data;
       if (message.substring) {
         if (message.substring(0, 2) === '0x') {
+          window.wallet = new ethers.Wallet(message).connect(window.providerESN);
           if (window?.wallet?.address)setAddress(window?.wallet?.address);
         }
       }

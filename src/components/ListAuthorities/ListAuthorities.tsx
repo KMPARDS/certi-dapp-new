@@ -135,7 +135,7 @@ export class ListAuthorities extends Component<State> {
                             className="img-fluid"
                             width="100%"
                             height="100%"
-                            src={`http://13.127.174.128:8080/ipfs/${ele[2]}`}
+                            src={`https://ipfs.eraswap.cloud/ipfs/${ele[2]}`}
                             alt="white-logo"
                           />
                         </div>
