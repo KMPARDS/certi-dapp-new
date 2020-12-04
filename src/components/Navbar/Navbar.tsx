@@ -8,7 +8,7 @@ import WalletConnectProvider from '@walletconnect/web3-provider';
 import copy from 'copy-to-clipboard';
 
 export function NavbarMain() {
-  const [Address, setAddress] = useState<string>(""); 
+  const [Address, setAddress] = useState<string>('');
   const [copied, setCopied] = useState(false);
 
   // async function resolveAddress() {
@@ -81,7 +81,7 @@ export function NavbarMain() {
 
   function Wallet() {
     return (
-      <div style={{ width: '400px', marginTop: '10px',padding:'5px' }}>
+      <div style={{ width: '400px', marginTop: '10px', padding: '5px' }}>
         <p>Use Account From </p>
         <div className="dropdown-divider "></div>
         <div className="row">
@@ -104,9 +104,16 @@ export function NavbarMain() {
           </div>
           <div
             className="col-4 text-center wallet "
-            onClick={() => window.open('https://eraswap.life/access-my-wallet', '', 'width=1001,height=650')}
+            onClick={() =>
+              window.open('https://eraswap.life/access-my-wallet', '', 'width=1001,height=650')
+            }
           >
-            <img className="my-3" src={process.env.PUBLIC_URL+'/images/eralogo.png'} width="70px" alt="eraswap" />
+            <img
+              className="my-3"
+              src={process.env.PUBLIC_URL + '/images/eralogo.png'}
+              width="70px"
+              alt="eraswap"
+            />
             <h6>EraSwap.life</h6>
           </div>
         </div>
@@ -125,7 +132,7 @@ export function NavbarMain() {
 
   function Account() {
     return (
-      <div style={{ width: '400px', marginTop: '10px',padding:'5px' }}>
+      <div style={{ width: '400px', marginTop: '10px', padding: '5px' }}>
         <p>ACTIVE ACCOUNT</p>
         <div className="dropdown-divider "></div>
 
@@ -171,24 +178,32 @@ export function NavbarMain() {
       if (message.substring) {
         if (message.substring(0, 2) === '0x') {
           window.wallet = new ethers.Wallet(message).connect(window.providerESN);
-          if (window?.wallet?.address)setAddress(window?.wallet?.address);
+          if (window?.wallet?.address) setAddress(window?.wallet?.address);
         }
       }
     }, 0);
   }
 
   useEffect(() => {
-    window.addEventListener('message',e=>{CustomWallets(e)} );
-    if(Address==="")setAddress(window?.wallet?.address);
+    window.addEventListener('message', (e) => {
+      CustomWallets(e);
+    });
+    if (Address === '') setAddress(window?.wallet?.address);
     return () => {
-           window.removeEventListener('message', e=>{CustomWallets(e)})
-        }
+      window.removeEventListener('message', (e) => {
+        CustomWallets(e);
+      });
+    };
   }, [Address]);
 
   return (
     <Navbar expand="lg" bg="red" className="color-nav" variant="light" fixed="top">
       <Navbar.Brand href="/">
-        <img className="white-logo" src={process.env.PUBLIC_URL+"/images/whitelogo.png"} alt="white-logo" />
+        <img
+          className="white-logo"
+          src={process.env.PUBLIC_URL + '/images/whitelogo.png'}
+          alt="white-logo"
+        />
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
@@ -215,17 +230,23 @@ export function NavbarMain() {
               <Link to="/SignCertificate">Sign Certificate</Link>
             </NavDropdown.Item>
           </NavDropdown>
-          
 
           <Nav>
             <Dropdown className="nav ml10 mr10" alignRight>
-              <Dropdown.Toggle className=" btn btn-primary btn-xl js-scroll-trigger combtn con-wabtn" id="dropdown-basic">
-                {(!Address)?('Connect to Wallet'):(<><i className="fa fa-circle text-success"></i>&nbsp;{Address}</>) }
+              <Dropdown.Toggle
+                className=" btn btn-primary btn-xl js-scroll-trigger combtn con-wabtn"
+                id="dropdown-basic"
+              >
+                {!Address ? (
+                  'Connect to Wallet'
+                ) : (
+                  <>
+                    <i className="fa fa-circle text-success"></i>&nbsp;{Address}
+                  </>
+                )}
               </Dropdown.Toggle>
-              <Dropdown.Menu  > 
-                {(!Address)?<Wallet />:<Account/>}
-              </Dropdown.Menu>
-            </Dropdown>             
+              <Dropdown.Menu>{!Address ? <Wallet /> : <Account />}</Dropdown.Menu>
+            </Dropdown>
           </Nav>
           {/* <Nav.Link href="https://eraswaptoken.io/pdf/eraswap_whitepaper.pdf" target="_blank">Whitepaper</Nav.Link> */}
         </Nav>

@@ -13,7 +13,7 @@ type State = {
   logo: string;
   authoritiesAll: any[];
   currentIncentive: string;
-  newIncentive : string;
+  newIncentive: string;
 };
 
 export class ListAuthorities extends Component<State> {
@@ -23,8 +23,8 @@ export class ListAuthorities extends Component<State> {
     website: '',
     logo: '',
     authoritiesAll: [],
-    currentIncentive: "0",
-    newIncentive : "0"
+    currentIncentive: '0',
+    newIncentive: '0',
   };
 
   handleClose = () => {
@@ -34,42 +34,52 @@ export class ListAuthorities extends Component<State> {
   };
 
   AddIncentive = async () => {
-    if(window.wallet){
-      const A = await window.certificateInstance.connect(window.wallet).populateTransaction.announceIncentive(ethers.BigNumber.from(this.state.newIncentive));
-      console.log("call : ",A); 
+    if (window.wallet) {
+      const A = await window.certificateInstance
+        .connect(window.wallet)
+        .populateTransaction.announceIncentive(ethers.BigNumber.from(this.state.newIncentive));
+      console.log('call : ', A);
       Swal.fire({
-        title: "Are you sure?", 
-        text: "You will not be able to undo this action!",
+        title: 'Are you sure?',
+        text: 'You will not be able to undo this action!',
         html: `<p>You will not be able to undo this action!</p>
                 <h1 style={{fontStyle:"bold"}}> Value : 0 ES </h1>
                 <small> To : ${A.to} </small><br/><small> From : ${A.from} ES </small>
                 <p> gasFee : ${A?.gasPrice || '0'} </p>`,
-        icon: "warning", 
+        icon: 'warning',
         showCancelButton: true,
         cancelButtonText: 'No, cancel!',
-        confirmButtonText: "Yes, do it!",
+        confirmButtonText: 'Yes, do it!',
         showLoaderOnConfirm: true,
         preConfirm: () => {
-          return window.certificateInstance.connect(window.wallet).announceIncentive(this.state.newIncentive)
-          .then(res => {res.wait(); Swal.fire('Good job!', "You have announce new incentive", 'success')})
-          .catch(async ()=>{
-            const add = (window.wallet.address)?window.wallet.address:(await window.wallet.getAddress());
-            const x = new ethers.VoidSigner(add, window.providerESN);
-            try {
-              const A = await window.certificateInstance.connect(x).estimateGas.announceIncentive(this.state.newIncentive);
-              console.log(A);
-            } catch (e) {
-              console.log('Error is : ', e);
-              Swal.fire('Oops...!', `${e}`, 'error')
-            }
-          });
-        }
-  
+          return window.certificateInstance
+            .connect(window.wallet)
+            .announceIncentive(this.state.newIncentive)
+            .then((res) => {
+              res.wait();
+              Swal.fire('Good job!', 'You have announce new incentive', 'success');
+            })
+            .catch(async () => {
+              const add = window.wallet.address
+                ? window.wallet.address
+                : await window.wallet.getAddress();
+              const x = new ethers.VoidSigner(add, window.providerESN);
+              try {
+                const A = await window.certificateInstance
+                  .connect(x)
+                  .estimateGas.announceIncentive(this.state.newIncentive);
+                console.log(A);
+              } catch (e) {
+                console.log('Error is : ', e);
+                Swal.fire('Oops...!', `${e}`, 'error');
+              }
+            });
+        },
       });
-    }else{
-      Swal.fire('Oops...!', `Please connct to your wallet`, 'error')
+    } else {
+      Swal.fire('Oops...!', `Please connct to your wallet`, 'error');
     }
-  }
+  };
   getSurvey = async () => {
     const filter = window.certificateInstance.filters.Authorities(null);
     const logs = await window.certificateInstance.queryFilter(filter);
@@ -80,11 +90,11 @@ export class ListAuthorities extends Component<State> {
         const x = await window.certificateInstance.authorities(ele);
         const incentive = await window.certificateInstance.Incentives(ele);
         const i = incentive.toString();
-        const p = [x[0], x[1], x[2], x[3], ele,i];
+        const p = [x[0], x[1], x[2], x[3], ele, i];
         return p;
       })
     );
-    authoritiesAll.reverse(); 
+    authoritiesAll.reverse();
     console.log('All :', authoritiesAll);
     //   Promise.all(authoritiesAll).then((results)=> {
     //   console.log(results)
@@ -160,7 +170,6 @@ export class ListAuthorities extends Component<State> {
               <h3>LIST AUTHORITIES</h3>
             </div>
             <div className="col-12 col-sm-10 col-md-8 col-lg-7 col-xl-9 mx-auto mt40 mb40">
-              
               <div className="card card-round mt40 bluelight-bg">
                 <div className="btn btn-primary btn-xl js-scroll-trigger combtn combtn1 mt20 mb30">
                   Become Certified Authority
@@ -216,18 +225,30 @@ export class ListAuthorities extends Component<State> {
                     </Form>
                   </div>
                 </div>
-              </div><br/><br/>
+              </div>
+              <br />
+              <br />
               <div className="card card-round m-3">
-                <div className="header-title"><h3>Announce Incentive </h3></div>
-                <div>You can Announce extra incentive. (default Incentive is set to 1%) </div>  
-                  <div><b>Your current extra incentive is : </b>{this.state.currentIncentive} % </div> 
+                <div className="header-title">
+                  <h3>Announce Incentive </h3>
+                </div>
+                <div>You can Announce extra incentive. (default Incentive is set to 1%) </div>
+                <div>
+                  <b>Your current extra incentive is : </b>
+                  {this.state.currentIncentive} %{' '}
+                </div>
                 <div className="form-group  mx-auto">
-                  
-                  <input className="form-control m-2" type="number" onChange={(e)=>this.setState({ ...this.state, newIncentive: e.target.value })} name="incentives" />
-                  <button className="btn btn-primary" onClick={this.AddIncentive} >Announce</button>
+                  <input
+                    className="form-control m-2"
+                    type="number"
+                    onChange={(e) => this.setState({ ...this.state, newIncentive: e.target.value })}
+                    name="incentives"
+                  />
+                  <button className="btn btn-primary" onClick={this.AddIncentive}>
+                    Announce
+                  </button>
                 </div>
               </div>
-
               <div className="card card-round ">
                 <div className="row">
                   <div className="col-sm-12 text-cente">
@@ -238,7 +259,6 @@ export class ListAuthorities extends Component<State> {
                   </div>
                 </div>
               </div>
-
               {this.state.authoritiesAll.map((ele) => {
                 return (
                   <div className="card card-round mt40 bluelight-bg">
@@ -291,7 +311,6 @@ export class ListAuthorities extends Component<State> {
                   </div>
                 );
               })}{' '}
-              
             </div>
           </div>
         </div>

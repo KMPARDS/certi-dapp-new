@@ -70,7 +70,7 @@ export class RegisterCertificate extends Component<State> {
   handleRegister = async (e) => {
     e.preventDefault();
     const Args = this.state.signHash.split(',');
-    console.log(Args); 
+    console.log(Args);
     this.setState({ Args: Args });
     // const color: string[] = ['danger', 'primary', 'success'];
 
@@ -79,7 +79,7 @@ export class RegisterCertificate extends Component<State> {
         //   assert(Args.length === 3)
         const sur = await window.certificateInstance
           .connect(window.wallet)
-          .registerCertificates(Args[0], Args[1], Args[2],{value: ethers.utils.parseEther('1'),});
+          .registerCertificates(Args[0], Args[1], Args[2], { value: ethers.utils.parseEther('1') });
         const receipt = await sur.wait();
         console.log('TXN Hash :', receipt);
         Swal.fire({
@@ -93,12 +93,16 @@ export class RegisterCertificate extends Component<State> {
           byte: receipt.events[0].args[0],
         });
       } catch (e) {
-        const add = (window.wallet?.address)?window.wallet.address:(await window.wallet?.getAddress());
+        const add = window.wallet?.address
+          ? window.wallet.address
+          : await window.wallet?.getAddress();
         const x = new ethers.VoidSigner(add, window.providerESN);
         try {
           const A = await window.certificateInstance
             .connect(x)
-            .estimateGas.registerCertificates(Args[0], Args[1], Args[2],{value: ethers.utils.parseEther('1')});
+            .estimateGas.registerCertificates(Args[0], Args[1], Args[2], {
+              value: ethers.utils.parseEther('1'),
+            });
           console.log(A);
         } catch (e) {
           console.log('Error is : ', e);

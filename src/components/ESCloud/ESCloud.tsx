@@ -4,16 +4,15 @@ import { RouteComponentProps } from 'react-router-dom';
 import axios from 'axios';
 import { ethers } from 'ethers';
 import Swal from 'sweetalert2';
- 
 
 type State = {
   bunchModal: boolean;
 };
 
 export class ESCloud extends Component<State> {
-  state:State = {
-    bunchModal : true,
-  }
+  state: State = {
+    bunchModal: true,
+  };
 
   render() {
     return (
@@ -23,9 +22,9 @@ export class ESCloud extends Component<State> {
             <div className="header-title">
               <h3>ESCLOUD</h3>
             </div>
+          </div>
         </div>
       </div>
-    </div>
     );
-  } 
+  }
 }
