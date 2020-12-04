@@ -27,6 +27,7 @@ export class ViewCertificate extends Component<State> {
     const parsedLogs = logs.map((log) => window.certificateInstance.interface.parseLog(log));
     const updatevalues = parsedLogs.map((parsedLogs) => parsedLogs.args[0]);
     console.log('All Certificates: ', updatevalues);
+    updatevalues.reverse();
     this.setState({ List: updatevalues });
   };
 

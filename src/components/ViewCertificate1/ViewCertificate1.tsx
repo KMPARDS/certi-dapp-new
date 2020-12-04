@@ -79,7 +79,7 @@ export class ViewCertificate1 extends Component<MyViewProperties, State> {
         Swal.fire({
           icon: 'success',
           title: 'Great 👍',
-          text: 'You have Register you Certificate ',
+          text: 'You have Donate/Gifted ES',
         });
         
       } catch (e) {
@@ -249,6 +249,7 @@ export class ViewCertificate1 extends Component<MyViewProperties, State> {
                     <h6 className="text-blue">is awarded to</h6>
                     <h5 className="text-blue">{this.state.Data?.name}</h5>
                     <h5 className=" font-weight-bold text-dark ">For {this.state.Data?.subject}</h5>
+                    <h5 className="font-weight-bold text-primary">with {this.state.Data?.score} </h5>
                     <h5 className="font-weight-bold text-dark">on {this.state.Data?.date} </h5>
                     <div dangerouslySetInnerHTML={{ __html: this.state.Data?.other }} />
                     {!this.state.auth.status ? (
@@ -307,9 +308,9 @@ export class ViewCertificate1 extends Component<MyViewProperties, State> {
                       </div>
                     )}
                     <h4 className="mt30 font-weight-bold text-dark mb20"> Cerficate Hash:</h4>
-                    <h6 className="mt30 font-weight-bold text-dark mb20">{this.state.hash}</h6>
+                    <h6 className="mt30  text-dark mb20">{this.state.hash}</h6>
                     <div className="col-md-12 text-center">
-                      <div className="qr">
+                    <div >  {/* for border add className="qr" */}
                       <QRCode value={this.state.hash} />
                       </div>
                     </div>
@@ -332,7 +333,8 @@ export class ViewCertificate1 extends Component<MyViewProperties, State> {
                 (this.myAddress === this.Verifier)? 
                 <Row className="pinside60">
               <h6>You Have {this.Balance} ES  </h6>
-              <Col>  <button onClick={e => this.Collect(e)} className="btn btn-primary">Withdraw now</button> </Col>
+              <Col> This Amount already tansfered to your wallet directly </Col>
+              {/* <Col>  <button onClick={e => this.Collect(e)} className="btn btn-primary">Withdraw now</button> </Col> */}
             </Row>:
                 <Row className="pinside60">
                 <h6>Want to send Some eraswap ? </h6>
@@ -342,7 +344,7 @@ export class ViewCertificate1 extends Component<MyViewProperties, State> {
               
               }
               
-              <button onClick={this.Print} className="btn btn-primary">Print </button>
+              {/* <button onClick={this.Print} className="btn btn-primary">Print </button> */}
             </div>
           </div> 
         </div>

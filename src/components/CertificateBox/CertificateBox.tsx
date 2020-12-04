@@ -92,7 +92,7 @@ export function CertificateBox(props: Certificate) {
             <h6 className="text-blue">is awarded to</h6>
             <h5 className="text-blue">{props.name ? props.name : data?.name}</h5>
             <h5 className="mt30 font-weight-bold text-dark mb20">
-              For Extraordinary performance in {props.subject ? props.subject : data?.subject} on{' '}
+              For Extraordinary performance in {props.subject ? props.subject : data?.subject} with {props.score ? props.score : data?.score} on{' '}
               {props.date ? props.date : data.date}
             </h5>
 
