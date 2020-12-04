@@ -345,12 +345,12 @@ export class CertificateFlattenCertificate extends Contract {
 
     collect(
       input: BytesLike,
-      overrides?: Overrides
+      overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
 
     "collect(bytes32)"(
       input: BytesLike,
-      overrides?: Overrides
+      overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
 
     dayswappers(
@@ -725,12 +725,12 @@ export class CertificateFlattenCertificate extends Contract {
 
   collect(
     input: BytesLike,
-    overrides?: Overrides
+    overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
 
   "collect(bytes32)"(
     input: BytesLike,
-    overrides?: Overrides
+    overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
 
   dayswappers(overrides?: CallOverrides): Promise<string>;
@@ -1234,11 +1234,11 @@ export class CertificateFlattenCertificate extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    collect(input: BytesLike, overrides?: Overrides): Promise<BigNumber>;
+    collect(input: BytesLike, overrides?: PayableOverrides): Promise<BigNumber>;
 
     "collect(bytes32)"(
       input: BytesLike,
-      overrides?: Overrides
+      overrides?: PayableOverrides
     ): Promise<BigNumber>;
 
     dayswappers(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1460,12 +1460,12 @@ export class CertificateFlattenCertificate extends Contract {
 
     collect(
       input: BytesLike,
-      overrides?: Overrides
+      overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;
 
     "collect(bytes32)"(
       input: BytesLike,
-      overrides?: Overrides
+      overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;
 
     dayswappers(overrides?: CallOverrides): Promise<PopulatedTransaction>;
