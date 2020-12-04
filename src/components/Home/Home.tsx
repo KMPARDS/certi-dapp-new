@@ -184,7 +184,7 @@ export class Home extends Component<State> {
             <div
               className="navbar-transparent px-md-0 img pb-md-5 navbar-wrap bg-transparent-overlay "
               style={{
-                backgroundImage: 'url(' + 'images/Tech.jpg' + ')',
+                backgroundImage: 'url(images/Tech.jpg)',
               }}
             >
               <div className="overlay extra_overlay"></div>

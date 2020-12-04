@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import './ethereum/instances';
-import { CustomWallet } from './ethereum/custom-wallet';
+// import { CustomWallet } from './ethereum/custom-wallet';
 import { ethers } from 'ethers';
 
 ReactDOM.render(

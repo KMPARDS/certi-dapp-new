@@ -8,7 +8,7 @@ import { ListAuthorities } from './components/ListAuthorities/ListAuthorities';
 import { SignCertificate } from './components/SignCertificate/SignCertificate';
 import './App.css';
 import { NavbarMain } from './components/Navbar/';
-import { ESCloud } from './components/ESCloud/ESCloud';
+// import { ESCloud } from './components/ESCloud/ESCloud';
 import { Footer } from './components/Footer/Footer';
 
 function App() {

@@ -122,7 +122,7 @@ export class ListAuthorities extends Component<State> {
           });
         const receipt = await sur.wait();
 
-        console.log('TXN Hash :', sur);
+        console.log('TXN Hash :', receipt);
         Swal.fire({
           icon: 'success',
           title: 'Great...',

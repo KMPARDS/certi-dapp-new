@@ -31,7 +31,7 @@ interface Auth {
 }
 
 export function CertificateBox(props: Certificate) {
-  const [exist, setExist] = useState<boolean>(true);
+  // const [exist, setExist] = useState<boolean>(true);
   const [spin, setSpin] = useState<boolean>(true);
   const [data, setData] = useState<LoadData>({
     name: '',
@@ -74,9 +74,10 @@ export function CertificateBox(props: Certificate) {
 
        
       } catch {
-        setExist(false);
+        // setExist(false);
       }
     })();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div>

@@ -113,7 +113,7 @@ export class ViewCertificate1 extends Component<MyViewProperties, State> {
       this.props?.children,
       this.containerEl
     )
-    var content = document.getElementById("divcontents");
+    // var content = document.getElementById("divcontents");
     var pri1 = document.getElementById("ifmcontentstoprint") as unknown  as HTMLIFrameElement;
     var pri = ( pri1).contentWindow;
     pri.document.open();
