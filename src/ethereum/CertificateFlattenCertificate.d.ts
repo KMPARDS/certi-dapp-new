@@ -2,121 +2,237 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
 import {
   Contract,
   ContractTransaction,
   Overrides,
   PayableOverrides,
   CallOverrides,
-} from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+} from "@ethersproject/contracts";
+import {BytesLike} from "@ethersproject/bytes";
+import {Listener, Provider} from "@ethersproject/providers";
+import {FunctionFragment, EventFragment, Result} from "@ethersproject/abi";
 
-interface CertificateFlattenCertificateInterface extends ethers.utils.Interface {
+interface CertificateFlattenCertificateInterface
+  extends ethers.utils.Interface {
   functions: {
-    'Incentives(address)': FunctionFragment;
-    'addAuthority(string,string,string)': FunctionFragment;
-    'announceIncentive(uint256)': FunctionFragment;
-    'authorities(address)': FunctionFragment;
-    'certificates(bytes32)': FunctionFragment;
-    'collect(bytes32)': FunctionFragment;
-    'dayswappers()': FunctionFragment;
-    'donate(bytes32)': FunctionFragment;
-    'getBalance(bytes32)': FunctionFragment;
-    'kycDapp()': FunctionFragment;
-    'nrtManager()': FunctionFragment;
-    'owner()': FunctionFragment;
-    'prepaidEs()': FunctionFragment;
-    'randomnessManager()': FunctionFragment;
-    'registerCertificates(string,bytes,address)': FunctionFragment;
-    'resolveAddress(bytes32)': FunctionFragment;
-    'resolveAddressStrict(bytes32)': FunctionFragment;
-    'resolveUsername(address)': FunctionFragment;
-    'resolveUsernameStrict(address)': FunctionFragment;
-    'setKycDapp(address)': FunctionFragment;
-    'splitSignature(bytes)': FunctionFragment;
-    'timeallyClub()': FunctionFragment;
-    'timeallyManager()': FunctionFragment;
-    'timeallyPromotionalBucket()': FunctionFragment;
-    'transferOwnership(address)': FunctionFragment;
-    'validatorManager()': FunctionFragment;
-    'verifyString(string,bytes)': FunctionFragment;
+    "Incentives(address)": FunctionFragment;
+    "addAuthority(string,string,string)": FunctionFragment;
+    "announceIncentive(uint256)": FunctionFragment;
+    "authorities(address)": FunctionFragment;
+    "certificates(bytes32)": FunctionFragment;
+    "collect(bytes32)": FunctionFragment;
+    "dayswappers()": FunctionFragment;
+    "donate(bytes32)": FunctionFragment;
+    "getBalance(bytes32)": FunctionFragment;
+    "kycDapp()": FunctionFragment;
+    "nrtManager()": FunctionFragment;
+    "owner()": FunctionFragment;
+    "prepaidEs()": FunctionFragment;
+    "randomnessManager()": FunctionFragment;
+    "registerCertificates(string,bytes,address)": FunctionFragment;
+    "resolveAddress(bytes32)": FunctionFragment;
+    "resolveAddressStrict(bytes32)": FunctionFragment;
+    "resolveUsername(address)": FunctionFragment;
+    "resolveUsernameStrict(address)": FunctionFragment;
+    "setKycDapp(address)": FunctionFragment;
+    "splitSignature(bytes)": FunctionFragment;
+    "timeallyClub()": FunctionFragment;
+    "timeallyManager()": FunctionFragment;
+    "timeallyPromotionalBucket()": FunctionFragment;
+    "transferOwnership(address)": FunctionFragment;
+    "validatorManager()": FunctionFragment;
+    "verifyString(string,bytes)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'Incentives', values: [string]): string;
-  encodeFunctionData(functionFragment: 'addAuthority', values: [string, string, string]): string;
-  encodeFunctionData(functionFragment: 'announceIncentive', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'authorities', values: [string]): string;
-  encodeFunctionData(functionFragment: 'certificates', values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: 'collect', values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: 'dayswappers', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'donate', values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: 'getBalance', values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: 'kycDapp', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'nrtManager', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'prepaidEs', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'randomnessManager', values?: undefined): string;
+  encodeFunctionData(functionFragment: "Incentives", values: [string]): string;
   encodeFunctionData(
-    functionFragment: 'registerCertificates',
+    functionFragment: "addAuthority",
+    values: [string, string, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "announceIncentive",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(functionFragment: "authorities", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "certificates",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(functionFragment: "collect", values: [BytesLike]): string;
+  encodeFunctionData(
+    functionFragment: "dayswappers",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "donate", values: [BytesLike]): string;
+  encodeFunctionData(
+    functionFragment: "getBalance",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(functionFragment: "kycDapp", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "nrtManager",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(functionFragment: "prepaidEs", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "randomnessManager",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "registerCertificates",
     values: [string, BytesLike, string]
   ): string;
-  encodeFunctionData(functionFragment: 'resolveAddress', values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: 'resolveAddressStrict', values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: 'resolveUsername', values: [string]): string;
-  encodeFunctionData(functionFragment: 'resolveUsernameStrict', values: [string]): string;
-  encodeFunctionData(functionFragment: 'setKycDapp', values: [string]): string;
-  encodeFunctionData(functionFragment: 'splitSignature', values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: 'timeallyClub', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'timeallyManager', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'timeallyPromotionalBucket', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'transferOwnership', values: [string]): string;
-  encodeFunctionData(functionFragment: 'validatorManager', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'verifyString', values: [string, BytesLike]): string;
+  encodeFunctionData(
+    functionFragment: "resolveAddress",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "resolveAddressStrict",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "resolveUsername",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "resolveUsernameStrict",
+    values: [string]
+  ): string;
+  encodeFunctionData(functionFragment: "setKycDapp", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "splitSignature",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "timeallyClub",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "timeallyManager",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "timeallyPromotionalBucket",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferOwnership",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "validatorManager",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "verifyString",
+    values: [string, BytesLike]
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'Incentives', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'addAuthority', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'announceIncentive', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'authorities', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'certificates', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'collect', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'dayswappers', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'donate', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getBalance', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'kycDapp', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'nrtManager', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'prepaidEs', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'randomnessManager', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'registerCertificates', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'resolveAddress', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'resolveAddressStrict', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'resolveUsername', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'resolveUsernameStrict', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'setKycDapp', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'splitSignature', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'timeallyClub', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'timeallyManager', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'timeallyPromotionalBucket', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'transferOwnership', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'validatorManager', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'verifyString', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "Incentives", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "addAuthority",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "announceIncentive",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "authorities",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "certificates",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "collect", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "dayswappers",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "donate", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getBalance", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "kycDapp", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "nrtManager", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "prepaidEs", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "randomnessManager",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "registerCertificates",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "resolveAddress",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "resolveAddressStrict",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "resolveUsername",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "resolveUsernameStrict",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "setKycDapp", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "splitSignature",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "timeallyClub",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "timeallyManager",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "timeallyPromotionalBucket",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "validatorManager",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "verifyString",
+    data: BytesLike
+  ): Result;
 
   events: {
-    'Authorities(address)': EventFragment;
-    'Donate(bytes32,address)': EventFragment;
-    'OwnershipTransferred(address,address)': EventFragment;
-    'RegisterCertificates(bytes32,address,address)': EventFragment;
-    'SignCertificate(bytes32,address)': EventFragment;
+    "Authorities(address)": EventFragment;
+    "Donate(bytes32,address)": EventFragment;
+    "OwnershipTransferred(address,address)": EventFragment;
+    "RegisterCertificates(bytes32,address,address)": EventFragment;
+    "SignCertificate(bytes32,address)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'Authorities'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'Donate'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'OwnershipTransferred'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'RegisterCertificates'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'SignCertificate'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Authorities"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Donate"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "RegisterCertificates"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "SignCertificate"): EventFragment;
 }
 
 export class CertificateFlattenCertificate extends Contract {
@@ -140,7 +256,7 @@ export class CertificateFlattenCertificate extends Contract {
       0: BigNumber;
     }>;
 
-    'Incentives(address)'(
+    "Incentives(address)"(
       arg0: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -154,16 +270,19 @@ export class CertificateFlattenCertificate extends Contract {
       overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
 
-    'addAuthority(string,string,string)'(
+    "addAuthority(string,string,string)"(
       _name: string,
       _website: string,
       _image: string,
       overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
 
-    announceIncentive(_value: BigNumberish, overrides?: Overrides): Promise<ContractTransaction>;
+    announceIncentive(
+      _value: BigNumberish,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
-    'announceIncentive(uint256)'(
+    "announceIncentive(uint256)"(
       _value: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
@@ -182,7 +301,7 @@ export class CertificateFlattenCertificate extends Contract {
       3: number;
     }>;
 
-    'authorities(address)'(
+    "authorities(address)"(
       arg0: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -210,7 +329,7 @@ export class CertificateFlattenCertificate extends Contract {
       3: BigNumber;
     }>;
 
-    'certificates(bytes32)'(
+    "certificates(bytes32)"(
       arg0: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
@@ -224,9 +343,12 @@ export class CertificateFlattenCertificate extends Contract {
       3: BigNumber;
     }>;
 
-    collect(input: BytesLike, overrides?: PayableOverrides): Promise<ContractTransaction>;
+    collect(
+      input: BytesLike,
+      overrides?: PayableOverrides
+    ): Promise<ContractTransaction>;
 
-    'collect(bytes32)'(
+    "collect(bytes32)"(
       input: BytesLike,
       overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
@@ -237,15 +359,21 @@ export class CertificateFlattenCertificate extends Contract {
       0: string;
     }>;
 
-    'dayswappers()'(
+    "dayswappers()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
     }>;
 
-    donate(input: BytesLike, overrides?: PayableOverrides): Promise<ContractTransaction>;
+    donate(
+      input: BytesLike,
+      overrides?: PayableOverrides
+    ): Promise<ContractTransaction>;
 
-    'donate(bytes32)'(input: BytesLike, overrides?: PayableOverrides): Promise<ContractTransaction>;
+    "donate(bytes32)"(
+      input: BytesLike,
+      overrides?: PayableOverrides
+    ): Promise<ContractTransaction>;
 
     getBalance(
       input: BytesLike,
@@ -254,7 +382,7 @@ export class CertificateFlattenCertificate extends Contract {
       0: BigNumber;
     }>;
 
-    'getBalance(bytes32)'(
+    "getBalance(bytes32)"(
       input: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
@@ -267,7 +395,7 @@ export class CertificateFlattenCertificate extends Contract {
       0: string;
     }>;
 
-    'kycDapp()'(
+    "kycDapp()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -279,7 +407,7 @@ export class CertificateFlattenCertificate extends Contract {
       0: string;
     }>;
 
-    'nrtManager()'(
+    "nrtManager()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -297,7 +425,7 @@ export class CertificateFlattenCertificate extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(
+    "owner()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -309,7 +437,7 @@ export class CertificateFlattenCertificate extends Contract {
       0: string;
     }>;
 
-    'prepaidEs()'(
+    "prepaidEs()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -321,7 +449,7 @@ export class CertificateFlattenCertificate extends Contract {
       0: string;
     }>;
 
-    'randomnessManager()'(
+    "randomnessManager()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -334,7 +462,7 @@ export class CertificateFlattenCertificate extends Contract {
       overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
 
-    'registerCertificates(string,bytes,address)'(
+    "registerCertificates(string,bytes,address)"(
       _hash: string,
       _signature: BytesLike,
       _Signer: string,
@@ -348,7 +476,7 @@ export class CertificateFlattenCertificate extends Contract {
       0: string;
     }>;
 
-    'resolveAddress(bytes32)'(
+    "resolveAddress(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
@@ -362,7 +490,7 @@ export class CertificateFlattenCertificate extends Contract {
       0: string;
     }>;
 
-    'resolveAddressStrict(bytes32)'(
+    "resolveAddressStrict(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
@@ -376,7 +504,7 @@ export class CertificateFlattenCertificate extends Contract {
       0: string;
     }>;
 
-    'resolveUsername(address)'(
+    "resolveUsername(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -390,16 +518,22 @@ export class CertificateFlattenCertificate extends Contract {
       0: string;
     }>;
 
-    'resolveUsernameStrict(address)'(
+    "resolveUsernameStrict(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<{
       0: string;
     }>;
 
-    setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
+    setKycDapp(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
-    'setKycDapp(address)'(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
+    "setKycDapp(address)"(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     splitSignature(
       sig: BytesLike,
@@ -410,7 +544,7 @@ export class CertificateFlattenCertificate extends Contract {
       2: string;
     }>;
 
-    'splitSignature(bytes)'(
+    "splitSignature(bytes)"(
       sig: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
@@ -425,7 +559,7 @@ export class CertificateFlattenCertificate extends Contract {
       0: string;
     }>;
 
-    'timeallyClub()'(
+    "timeallyClub()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -437,7 +571,7 @@ export class CertificateFlattenCertificate extends Contract {
       0: string;
     }>;
 
-    'timeallyManager()'(
+    "timeallyManager()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -449,7 +583,7 @@ export class CertificateFlattenCertificate extends Contract {
       0: string;
     }>;
 
-    'timeallyPromotionalBucket()'(
+    "timeallyPromotionalBucket()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -458,12 +592,15 @@ export class CertificateFlattenCertificate extends Contract {
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(
+    "transferOwnership(address)"(
       newOwner: string,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
@@ -474,7 +611,7 @@ export class CertificateFlattenCertificate extends Contract {
       0: string;
     }>;
 
-    'validatorManager()'(
+    "validatorManager()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -489,7 +626,7 @@ export class CertificateFlattenCertificate extends Contract {
       0: string;
     }>;
 
-    'verifyString(string,bytes)'(
+    "verifyString(string,bytes)"(
       message: string,
       signature: BytesLike,
       overrides?: CallOverrides
@@ -501,7 +638,10 @@ export class CertificateFlattenCertificate extends Contract {
 
   Incentives(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-  'Incentives(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+  "Incentives(address)"(
+    arg0: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   addAuthority(
     _name: string,
@@ -510,16 +650,19 @@ export class CertificateFlattenCertificate extends Contract {
     overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
 
-  'addAuthority(string,string,string)'(
+  "addAuthority(string,string,string)"(
     _name: string,
     _website: string,
     _image: string,
     overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
 
-  announceIncentive(_value: BigNumberish, overrides?: Overrides): Promise<ContractTransaction>;
+  announceIncentive(
+    _value: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
-  'announceIncentive(uint256)'(
+  "announceIncentive(uint256)"(
     _value: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
@@ -538,7 +681,7 @@ export class CertificateFlattenCertificate extends Contract {
     3: number;
   }>;
 
-  'authorities(address)'(
+  "authorities(address)"(
     arg0: string,
     overrides?: CallOverrides
   ): Promise<{
@@ -566,7 +709,7 @@ export class CertificateFlattenCertificate extends Contract {
     3: BigNumber;
   }>;
 
-  'certificates(bytes32)'(
+  "certificates(bytes32)"(
     arg0: BytesLike,
     overrides?: CallOverrides
   ): Promise<{
@@ -580,29 +723,44 @@ export class CertificateFlattenCertificate extends Contract {
     3: BigNumber;
   }>;
 
-  collect(input: BytesLike, overrides?: PayableOverrides): Promise<ContractTransaction>;
+  collect(
+    input: BytesLike,
+    overrides?: PayableOverrides
+  ): Promise<ContractTransaction>;
 
-  'collect(bytes32)'(input: BytesLike, overrides?: PayableOverrides): Promise<ContractTransaction>;
+  "collect(bytes32)"(
+    input: BytesLike,
+    overrides?: PayableOverrides
+  ): Promise<ContractTransaction>;
 
   dayswappers(overrides?: CallOverrides): Promise<string>;
 
-  'dayswappers()'(overrides?: CallOverrides): Promise<string>;
+  "dayswappers()"(overrides?: CallOverrides): Promise<string>;
 
-  donate(input: BytesLike, overrides?: PayableOverrides): Promise<ContractTransaction>;
+  donate(
+    input: BytesLike,
+    overrides?: PayableOverrides
+  ): Promise<ContractTransaction>;
 
-  'donate(bytes32)'(input: BytesLike, overrides?: PayableOverrides): Promise<ContractTransaction>;
+  "donate(bytes32)"(
+    input: BytesLike,
+    overrides?: PayableOverrides
+  ): Promise<ContractTransaction>;
 
   getBalance(input: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
 
-  'getBalance(bytes32)'(input: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+  "getBalance(bytes32)"(
+    input: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   kycDapp(overrides?: CallOverrides): Promise<string>;
 
-  'kycDapp()'(overrides?: CallOverrides): Promise<string>;
+  "kycDapp()"(overrides?: CallOverrides): Promise<string>;
 
   nrtManager(overrides?: CallOverrides): Promise<string>;
 
-  'nrtManager()'(overrides?: CallOverrides): Promise<string>;
+  "nrtManager()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Returns the address of the current owner.
@@ -612,15 +770,15 @@ export class CertificateFlattenCertificate extends Contract {
   /**
    * Returns the address of the current owner.
    */
-  'owner()'(overrides?: CallOverrides): Promise<string>;
+  "owner()"(overrides?: CallOverrides): Promise<string>;
 
   prepaidEs(overrides?: CallOverrides): Promise<string>;
 
-  'prepaidEs()'(overrides?: CallOverrides): Promise<string>;
+  "prepaidEs()"(overrides?: CallOverrides): Promise<string>;
 
   randomnessManager(overrides?: CallOverrides): Promise<string>;
 
-  'randomnessManager()'(overrides?: CallOverrides): Promise<string>;
+  "randomnessManager()"(overrides?: CallOverrides): Promise<string>;
 
   registerCertificates(
     _hash: string,
@@ -629,32 +787,59 @@ export class CertificateFlattenCertificate extends Contract {
     overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
 
-  'registerCertificates(string,bytes,address)'(
+  "registerCertificates(string,bytes,address)"(
     _hash: string,
     _signature: BytesLike,
     _Signer: string,
     overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
 
-  resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+  resolveAddress(
+    _username: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  'resolveAddress(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+  "resolveAddress(bytes32)"(
+    _username: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  resolveAddressStrict(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+  resolveAddressStrict(
+    _username: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  'resolveAddressStrict(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+  "resolveAddressStrict(bytes32)"(
+    _username: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   resolveUsername(_wallet: string, overrides?: CallOverrides): Promise<string>;
 
-  'resolveUsername(address)'(_wallet: string, overrides?: CallOverrides): Promise<string>;
+  "resolveUsername(address)"(
+    _wallet: string,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  resolveUsernameStrict(_wallet: string, overrides?: CallOverrides): Promise<string>;
+  resolveUsernameStrict(
+    _wallet: string,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  'resolveUsernameStrict(address)'(_wallet: string, overrides?: CallOverrides): Promise<string>;
+  "resolveUsernameStrict(address)"(
+    _wallet: string,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
+  setKycDapp(
+    _kycDapp: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
-  'setKycDapp(address)'(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
+  "setKycDapp(address)"(
+    _kycDapp: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   splitSignature(
     sig: BytesLike,
@@ -665,7 +850,7 @@ export class CertificateFlattenCertificate extends Contract {
     2: string;
   }>;
 
-  'splitSignature(bytes)'(
+  "splitSignature(bytes)"(
     sig: BytesLike,
     overrides?: CallOverrides
   ): Promise<{
@@ -676,36 +861,43 @@ export class CertificateFlattenCertificate extends Contract {
 
   timeallyClub(overrides?: CallOverrides): Promise<string>;
 
-  'timeallyClub()'(overrides?: CallOverrides): Promise<string>;
+  "timeallyClub()"(overrides?: CallOverrides): Promise<string>;
 
   timeallyManager(overrides?: CallOverrides): Promise<string>;
 
-  'timeallyManager()'(overrides?: CallOverrides): Promise<string>;
+  "timeallyManager()"(overrides?: CallOverrides): Promise<string>;
 
   timeallyPromotionalBucket(overrides?: CallOverrides): Promise<string>;
 
-  'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<string>;
+  "timeallyPromotionalBucket()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
    */
-  transferOwnership(newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+  transferOwnership(
+    newOwner: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
    */
-  'transferOwnership(address)'(
+  "transferOwnership(address)"(
     newOwner: string,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
   validatorManager(overrides?: CallOverrides): Promise<string>;
 
-  'validatorManager()'(overrides?: CallOverrides): Promise<string>;
+  "validatorManager()"(overrides?: CallOverrides): Promise<string>;
 
-  verifyString(message: string, signature: BytesLike, overrides?: CallOverrides): Promise<string>;
+  verifyString(
+    message: string,
+    signature: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  'verifyString(string,bytes)'(
+  "verifyString(string,bytes)"(
     message: string,
     signature: BytesLike,
     overrides?: CallOverrides
@@ -714,7 +906,10 @@ export class CertificateFlattenCertificate extends Contract {
   callStatic: {
     Incentives(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    'Incentives(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "Incentives(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     addAuthority(
       _name: string,
@@ -723,16 +918,22 @@ export class CertificateFlattenCertificate extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'addAuthority(string,string,string)'(
+    "addAuthority(string,string,string)"(
       _name: string,
       _website: string,
       _image: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    announceIncentive(_value: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    announceIncentive(
+      _value: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    'announceIncentive(uint256)'(_value: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    "announceIncentive(uint256)"(
+      _value: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     authorities(
       arg0: string,
@@ -748,7 +949,7 @@ export class CertificateFlattenCertificate extends Contract {
       3: number;
     }>;
 
-    'authorities(address)'(
+    "authorities(address)"(
       arg0: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -776,7 +977,7 @@ export class CertificateFlattenCertificate extends Contract {
       3: BigNumber;
     }>;
 
-    'certificates(bytes32)'(
+    "certificates(bytes32)"(
       arg0: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
@@ -792,27 +993,36 @@ export class CertificateFlattenCertificate extends Contract {
 
     collect(input: BytesLike, overrides?: CallOverrides): Promise<void>;
 
-    'collect(bytes32)'(input: BytesLike, overrides?: CallOverrides): Promise<void>;
+    "collect(bytes32)"(
+      input: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     dayswappers(overrides?: CallOverrides): Promise<string>;
 
-    'dayswappers()'(overrides?: CallOverrides): Promise<string>;
+    "dayswappers()"(overrides?: CallOverrides): Promise<string>;
 
     donate(input: BytesLike, overrides?: CallOverrides): Promise<void>;
 
-    'donate(bytes32)'(input: BytesLike, overrides?: CallOverrides): Promise<void>;
+    "donate(bytes32)"(
+      input: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     getBalance(input: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
 
-    'getBalance(bytes32)'(input: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    "getBalance(bytes32)"(
+      input: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     kycDapp(overrides?: CallOverrides): Promise<string>;
 
-    'kycDapp()'(overrides?: CallOverrides): Promise<string>;
+    "kycDapp()"(overrides?: CallOverrides): Promise<string>;
 
     nrtManager(overrides?: CallOverrides): Promise<string>;
 
-    'nrtManager()'(overrides?: CallOverrides): Promise<string>;
+    "nrtManager()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Returns the address of the current owner.
@@ -822,15 +1032,15 @@ export class CertificateFlattenCertificate extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<string>;
+    "owner()"(overrides?: CallOverrides): Promise<string>;
 
     prepaidEs(overrides?: CallOverrides): Promise<string>;
 
-    'prepaidEs()'(overrides?: CallOverrides): Promise<string>;
+    "prepaidEs()"(overrides?: CallOverrides): Promise<string>;
 
     randomnessManager(overrides?: CallOverrides): Promise<string>;
 
-    'randomnessManager()'(overrides?: CallOverrides): Promise<string>;
+    "randomnessManager()"(overrides?: CallOverrides): Promise<string>;
 
     registerCertificates(
       _hash: string,
@@ -839,35 +1049,59 @@ export class CertificateFlattenCertificate extends Contract {
       overrides?: CallOverrides
     ): Promise<string>;
 
-    'registerCertificates(string,bytes,address)'(
+    "registerCertificates(string,bytes,address)"(
       _hash: string,
       _signature: BytesLike,
       _Signer: string,
       overrides?: CallOverrides
     ): Promise<string>;
 
-    resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
-
-    'resolveAddress(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
-
-    resolveAddressStrict(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
-
-    'resolveAddressStrict(bytes32)'(
+    resolveAddress(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<string>;
 
-    resolveUsername(_wallet: string, overrides?: CallOverrides): Promise<string>;
+    "resolveAddress(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    'resolveUsername(address)'(_wallet: string, overrides?: CallOverrides): Promise<string>;
+    resolveAddressStrict(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    resolveUsernameStrict(_wallet: string, overrides?: CallOverrides): Promise<string>;
+    "resolveAddressStrict(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    'resolveUsernameStrict(address)'(_wallet: string, overrides?: CallOverrides): Promise<string>;
+    resolveUsername(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    "resolveUsername(address)"(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    resolveUsernameStrict(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    "resolveUsernameStrict(address)"(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     setKycDapp(_kycDapp: string, overrides?: CallOverrides): Promise<void>;
 
-    'setKycDapp(address)'(_kycDapp: string, overrides?: CallOverrides): Promise<void>;
+    "setKycDapp(address)"(
+      _kycDapp: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     splitSignature(
       sig: BytesLike,
@@ -878,7 +1112,7 @@ export class CertificateFlattenCertificate extends Contract {
       2: string;
     }>;
 
-    'splitSignature(bytes)'(
+    "splitSignature(bytes)"(
       sig: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
@@ -889,33 +1123,43 @@ export class CertificateFlattenCertificate extends Contract {
 
     timeallyClub(overrides?: CallOverrides): Promise<string>;
 
-    'timeallyClub()'(overrides?: CallOverrides): Promise<string>;
+    "timeallyClub()"(overrides?: CallOverrides): Promise<string>;
 
     timeallyManager(overrides?: CallOverrides): Promise<string>;
 
-    'timeallyManager()'(overrides?: CallOverrides): Promise<string>;
+    "timeallyManager()"(overrides?: CallOverrides): Promise<string>;
 
     timeallyPromotionalBucket(overrides?: CallOverrides): Promise<string>;
 
-    'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<string>;
+    "timeallyPromotionalBucket()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: CallOverrides): Promise<void>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(newOwner: string, overrides?: CallOverrides): Promise<void>;
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     validatorManager(overrides?: CallOverrides): Promise<string>;
 
-    'validatorManager()'(overrides?: CallOverrides): Promise<string>;
+    "validatorManager()"(overrides?: CallOverrides): Promise<string>;
 
-    verifyString(message: string, signature: BytesLike, overrides?: CallOverrides): Promise<string>;
+    verifyString(
+      message: string,
+      signature: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    'verifyString(string,bytes)'(
+    "verifyString(string,bytes)"(
       message: string,
       signature: BytesLike,
       overrides?: CallOverrides
@@ -927,9 +1171,16 @@ export class CertificateFlattenCertificate extends Contract {
 
     Donate(hashedinput: null, doner: null): EventFilter;
 
-    OwnershipTransferred(previousOwner: string | null, newOwner: string | null): EventFilter;
+    OwnershipTransferred(
+      previousOwner: string | null,
+      newOwner: string | null
+    ): EventFilter;
 
-    RegisterCertificates(hashedinput: null, _signer: null, _verifier: null): EventFilter;
+    RegisterCertificates(
+      hashedinput: null,
+      _signer: null,
+      _verifier: null
+    ): EventFilter;
 
     SignCertificate(hashedinput: null, _signer: null): EventFilter;
   };
@@ -937,7 +1188,10 @@ export class CertificateFlattenCertificate extends Contract {
   estimateGas: {
     Incentives(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    'Incentives(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "Incentives(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     addAuthority(
       _name: string,
@@ -946,48 +1200,72 @@ export class CertificateFlattenCertificate extends Contract {
       overrides?: PayableOverrides
     ): Promise<BigNumber>;
 
-    'addAuthority(string,string,string)'(
+    "addAuthority(string,string,string)"(
       _name: string,
       _website: string,
       _image: string,
       overrides?: PayableOverrides
     ): Promise<BigNumber>;
 
-    announceIncentive(_value: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
+    announceIncentive(
+      _value: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
-    'announceIncentive(uint256)'(_value: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
+    "announceIncentive(uint256)"(
+      _value: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     authorities(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    'authorities(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "authorities(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    certificates(arg0: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    certificates(
+      arg0: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'certificates(bytes32)'(arg0: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    "certificates(bytes32)"(
+      arg0: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     collect(input: BytesLike, overrides?: PayableOverrides): Promise<BigNumber>;
 
-    'collect(bytes32)'(input: BytesLike, overrides?: PayableOverrides): Promise<BigNumber>;
+    "collect(bytes32)"(
+      input: BytesLike,
+      overrides?: PayableOverrides
+    ): Promise<BigNumber>;
 
     dayswappers(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'dayswappers()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "dayswappers()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     donate(input: BytesLike, overrides?: PayableOverrides): Promise<BigNumber>;
 
-    'donate(bytes32)'(input: BytesLike, overrides?: PayableOverrides): Promise<BigNumber>;
+    "donate(bytes32)"(
+      input: BytesLike,
+      overrides?: PayableOverrides
+    ): Promise<BigNumber>;
 
     getBalance(input: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
 
-    'getBalance(bytes32)'(input: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    "getBalance(bytes32)"(
+      input: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     kycDapp(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'kycDapp()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "kycDapp()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     nrtManager(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'nrtManager()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "nrtManager()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Returns the address of the current owner.
@@ -997,15 +1275,15 @@ export class CertificateFlattenCertificate extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     prepaidEs(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'prepaidEs()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "prepaidEs()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     randomnessManager(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'randomnessManager()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "randomnessManager()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     registerCertificates(
       _hash: string,
@@ -1014,68 +1292,103 @@ export class CertificateFlattenCertificate extends Contract {
       overrides?: PayableOverrides
     ): Promise<BigNumber>;
 
-    'registerCertificates(string,bytes,address)'(
+    "registerCertificates(string,bytes,address)"(
       _hash: string,
       _signature: BytesLike,
       _Signer: string,
       overrides?: PayableOverrides
     ): Promise<BigNumber>;
 
-    resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
-
-    'resolveAddress(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
-
-    resolveAddressStrict(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
-
-    'resolveAddressStrict(bytes32)'(
+    resolveAddress(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    resolveUsername(_wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "resolveAddress(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'resolveUsername(address)'(_wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+    resolveAddressStrict(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    resolveUsernameStrict(_wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "resolveAddressStrict(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'resolveUsernameStrict(address)'(
+    resolveUsername(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "resolveUsername(address)"(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    resolveUsernameStrict(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "resolveUsernameStrict(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<BigNumber>;
 
-    'setKycDapp(address)'(_kycDapp: string, overrides?: Overrides): Promise<BigNumber>;
+    "setKycDapp(address)"(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
-    splitSignature(sig: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    splitSignature(
+      sig: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'splitSignature(bytes)'(sig: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    "splitSignature(bytes)"(
+      sig: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     timeallyClub(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'timeallyClub()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "timeallyClub()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     timeallyManager(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'timeallyManager()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "timeallyManager()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     timeallyPromotionalBucket(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "timeallyPromotionalBucket()"(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<BigNumber>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(newOwner: string, overrides?: Overrides): Promise<BigNumber>;
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     validatorManager(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'validatorManager()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "validatorManager()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     verifyString(
       message: string,
@@ -1083,7 +1396,7 @@ export class CertificateFlattenCertificate extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'verifyString(string,bytes)'(
+    "verifyString(string,bytes)"(
       message: string,
       signature: BytesLike,
       overrides?: CallOverrides
@@ -1091,9 +1404,15 @@ export class CertificateFlattenCertificate extends Contract {
   };
 
   populateTransaction: {
-    Incentives(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    Incentives(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'Incentives(address)'(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "Incentives(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     addAuthority(
       _name: string,
@@ -1102,63 +1421,84 @@ export class CertificateFlattenCertificate extends Contract {
       overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;
 
-    'addAuthority(string,string,string)'(
+    "addAuthority(string,string,string)"(
       _name: string,
       _website: string,
       _image: string,
       overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;
 
-    announceIncentive(_value: BigNumberish, overrides?: Overrides): Promise<PopulatedTransaction>;
-
-    'announceIncentive(uint256)'(
+    announceIncentive(
       _value: BigNumberish,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    authorities(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "announceIncentive(uint256)"(
+      _value: BigNumberish,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
-    'authorities(address)'(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    authorities(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    certificates(arg0: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "authorities(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'certificates(bytes32)'(
+    certificates(
       arg0: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    collect(input: BytesLike, overrides?: PayableOverrides): Promise<PopulatedTransaction>;
+    "certificates(bytes32)"(
+      arg0: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'collect(bytes32)'(
+    collect(
+      input: BytesLike,
+      overrides?: PayableOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "collect(bytes32)"(
       input: BytesLike,
       overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;
 
     dayswappers(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'dayswappers()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "dayswappers()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    donate(input: BytesLike, overrides?: PayableOverrides): Promise<PopulatedTransaction>;
-
-    'donate(bytes32)'(
+    donate(
       input: BytesLike,
       overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;
 
-    getBalance(input: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "donate(bytes32)"(
+      input: BytesLike,
+      overrides?: PayableOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'getBalance(bytes32)'(
+    getBalance(
+      input: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "getBalance(bytes32)"(
       input: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     kycDapp(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'kycDapp()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "kycDapp()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     nrtManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'nrtManager()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "nrtManager()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Returns the address of the current owner.
@@ -1168,15 +1508,17 @@ export class CertificateFlattenCertificate extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     prepaidEs(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'prepaidEs()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "prepaidEs()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     randomnessManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'randomnessManager()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "randomnessManager()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     registerCertificates(
       _hash: string,
@@ -1185,16 +1527,19 @@ export class CertificateFlattenCertificate extends Contract {
       overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;
 
-    'registerCertificates(string,bytes,address)'(
+    "registerCertificates(string,bytes,address)"(
       _hash: string,
       _signature: BytesLike,
       _Signer: string,
       overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;
 
-    resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    resolveAddress(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'resolveAddress(bytes32)'(
+    "resolveAddress(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1204,14 +1549,17 @@ export class CertificateFlattenCertificate extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'resolveAddressStrict(bytes32)'(
+    "resolveAddressStrict(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    resolveUsername(_wallet: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    resolveUsername(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'resolveUsername(address)'(
+    "resolveUsername(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1221,50 +1569,70 @@ export class CertificateFlattenCertificate extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'resolveUsernameStrict(address)'(
+    "resolveUsernameStrict(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    setKycDapp(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
-    'setKycDapp(address)'(_kycDapp: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    "setKycDapp(address)"(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
-    splitSignature(sig: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    splitSignature(
+      sig: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'splitSignature(bytes)'(
+    "splitSignature(bytes)"(
       sig: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     timeallyClub(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'timeallyClub()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "timeallyClub()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     timeallyManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'timeallyManager()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "timeallyManager()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    timeallyPromotionalBucket(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    timeallyPromotionalBucket(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "timeallyPromotionalBucket()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(
+    "transferOwnership(address)"(
       newOwner: string,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
     validatorManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'validatorManager()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "validatorManager()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     verifyString(
       message: string,
@@ -1272,7 +1640,7 @@ export class CertificateFlattenCertificate extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'verifyString(string,bytes)'(
+    "verifyString(string,bytes)"(
       message: string,
       signature: BytesLike,
       overrides?: CallOverrides
