@@ -17,12 +17,11 @@ import {
   PayableOverrides,
   CallOverrides,
 } from "@ethersproject/contracts";
-import {BytesLike} from "@ethersproject/bytes";
-import {Listener, Provider} from "@ethersproject/providers";
-import {FunctionFragment, EventFragment, Result} from "@ethersproject/abi";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
-interface CertificateFlattenCertificateInterface
-  extends ethers.utils.Interface {
+interface CertiDappInterface extends ethers.utils.Interface {
   functions: {
     "Incentives(address)": FunctionFragment;
     "addAuthority(string,string,string)": FunctionFragment;
@@ -235,7 +234,7 @@ interface CertificateFlattenCertificateInterface
   getEvent(nameOrSignatureOrTopic: "SignCertificate"): EventFragment;
 }
 
-export class CertificateFlattenCertificate extends Contract {
+export class CertiDapp extends Contract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
@@ -246,7 +245,7 @@ export class CertificateFlattenCertificate extends Contract {
   removeAllListeners(eventName: EventFilter | string): this;
   removeListener(eventName: any, listener: Listener): this;
 
-  interface: CertificateFlattenCertificateInterface;
+  interface: CertiDappInterface;
 
   functions: {
     Incentives(
