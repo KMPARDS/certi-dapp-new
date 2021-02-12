@@ -164,6 +164,7 @@ export function NavbarMain() {
           onClick={() => {
             window.wallet = undefined;
             setAddress(null);
+            window.localStorage.clear();
             window.location.reload();
           }}
         >
