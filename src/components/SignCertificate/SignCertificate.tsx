@@ -190,18 +190,7 @@ export class SignCertificate extends Component<State> {
                 >
                   New Certificate
                 </button>
-                <a
-                  href="/"
-                  className="btn btn-primary btn-xl js-scroll-trigger combtn combtn1 mt20 mb30 ml10"
-                >
-                  Sign Encoded Certificate
-                </a>
-                <a
-                  href="/"
-                  className="btn btn-primary btn-xl js-scroll-trigger combtn combtn1 mt20 mb30 ml10"
-                >
-                  CSV Mode
-                </a>
+               
               </div>
               {this.state.create ? <Create /> : null}
             </div>
