@@ -168,12 +168,7 @@ export function CertificateBox(props: Certificate) {
                   </h6>
 
                   <div className="mt20 mb20">
-                    <a
-                      href="/"
-                      className="btn btn-primary btn-xl js-scroll-trigger combtn combtn1 mt20 mb30"
-                    >
-                      View on EtherScan
-                    </a>
+                    
                   </div>
                 </>
               ) : (

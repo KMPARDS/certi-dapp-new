@@ -124,7 +124,7 @@ export function NavbarMain() {
           rel="noopener noreferrer"
           className="text-center"
         >
-          Don’t have an Ethereum account?
+          Don’t have an ESN account?
         </a>
       </div>
     );

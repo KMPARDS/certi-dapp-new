@@ -218,7 +218,7 @@ export class ViewCertificate1 extends Component<MyViewProperties, State> {
                     <p className="description wow animated fadeIn delay-2s p_edit animated">
                       This section is used to view an already registered certificate. Using the
                       below box, you can view an already registered certificate with CertiÐApp Smart
-                      Contract on Ethereum Blockchain. You need a certificate hash to proceed. If
+                      Contract on EraSwap Blockchain. You need a certificate hash to proceed. If
                       you don't have a certificate hash, please ask the certificate holder (whose
                       certificate you want to see) to give you hash of their certificate.
                     </p>
@@ -324,14 +324,7 @@ export class ViewCertificate1 extends Component<MyViewProperties, State> {
                       <h6 className="mt30 font-weight-bold text-dark mb20">
                         Created at transacon0x8ec5...d924
                       </h6>
-                      <div className="mt20 mb20">
-                        <a
-                          href="/"
-                          className="btn btn-primary btn-xl js-scroll-trigger combtn combtn1 mt20 mb30"
-                        >
-                          View on EtherScan
-                        </a>
-                      </div>
+                      
                     </div>
                   </div>
                 </div>

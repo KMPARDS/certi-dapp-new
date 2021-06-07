@@ -135,7 +135,7 @@ export class RegisterCertificate extends Component<State> {
                 <div className="row">
                   <div className="col-sm-12 text-cente">
                     <p className="description wow animated fadeIn delay-2s p_edit animated">
-                      CertiDApp utilizes Elliptic Curve cryptography and Ethereum Blockchain’s
+                      CertiDApp utilizes Elliptic Curve cryptography and EraSwap Blockchain’s
                       immutability, IPFS decentralized file storage to feature transparent
                       verification of certificates.
                     </p>

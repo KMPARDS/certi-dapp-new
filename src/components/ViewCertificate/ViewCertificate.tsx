@@ -50,7 +50,7 @@ export class ViewCertificate extends Component<State> {
                     <p className="description wow animated fadeIn delay-2s p_edit animated">
                       This section is used to view an already registered certificate. Using the
                       below box, you can view an already registered certificate with CertiÐApp Smart
-                      Contract on Ethereum Blockchain. You need a certificate hash to proceed. If
+                      Contract on EraSwap Blockchain. You need a certificate hash to proceed. If
                       you don't have a certificate hash, please ask the certificate holder (whose
                       certificate you want to see) to give you hash of their certificate.
                     </p>

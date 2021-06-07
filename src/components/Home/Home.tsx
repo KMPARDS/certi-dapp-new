@@ -115,7 +115,7 @@ export class Home extends Component<State> {
                 <div className="row">
                   <div className="col-sm-12 col-md-12 col-lg-6 description align-items-center justify-content-center Padd_edit">
                     <p className="description wow animated fadeIn delay-2s p_edit animated">
-                      CertiDApp utilizes Elliptic Curve cryptography and Ethereum Blockchain’s
+                      CertiDApp utilizes Elliptic Curve cryptography and EraSwap Network Blockchain’s
                       immutability, IPFS decentralized file storage to feature transparent
                       verification of certificates.
                     </p>
