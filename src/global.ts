@@ -1,5 +1,5 @@
 import { ethers } from 'ethers';
-import { CustomProvider } from 'eraswap-sdk/dist/custom-provider';
+import { CustomProvider } from 'eraswap-sdk';
 import { CertiDapp } from './ethereum/CertiDapp';
 
 // import { CustomWallet } from './ethereum/custom-wallet';
@@ -9,7 +9,7 @@ import { CertiDapp } from './ethereum/CertiDapp';
 declare global {
   interface Window {
     provider: ethers.providers.JsonRpcProvider;
-    providerESN: CustomProvider;
+    providerESN: any ;
     wallet: any;
     ethereum: ethers.providers.ExternalProvider;
     certificateInstance: CertiDapp;
