@@ -3,9 +3,9 @@ name: build
 
 on:
   push:
-    branches: [master]
+    branches: [pranjal]
   pull_request:
-    branches: [master]
+    branches: [pranjal]
 
 jobs:
   build:
